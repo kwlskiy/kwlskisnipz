@@ -1,18 +1,19 @@
 const startArray = ["yes", "no"]
 
-const myResult1 = reverse(array)
+const myResult1 = reverse(startArray)
 function reverse(s) {
     return [...s].reverse();
 }
 //here "startArray" is not reversed: ["yes", "no"], due to being copied and we have no side effects to "startArray"
-console.log(array)
+console.log(startArray)
 
-const myResult2 = reverseDeep(array)
+const myResult2 = reverseDeep(startArray)
 function reverseDeep(s) {
     return s.reverse()
 }
-//here the value is reversed because we use the same reference: ["no", "yes"]
-console.log(array)
+//here the value is actually reversed because we use the same reference: ["no", "yes"]
+console.log(startArray)
+
 
 //this happens because the parameter is passed by value and startArray is a "reference type" so it does not contain the actual values itself, it contains a reference to the memory where these values are stored
 //so with reverseDeep we re-use the reference and change the value where our array referenced, because we dont copy the array
@@ -47,7 +48,8 @@ myObj.name = "Luigi"
 console.log(myObj.name)
 
 //BUT this does not work:
-//const myObj = { name: "Luigi" }
+//myObj = { name: "Luigi" }
+//myArr = ["pusher"]
 
 //for reference:
 //Value types: Boolean, null, String, undefined, Number
