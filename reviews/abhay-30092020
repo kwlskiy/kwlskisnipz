@@ -1,0 +1,110 @@
+@Abhay#2190 your code looks good! here are a few suggestions
+1. use let and const instead of var whenever possible
+```JS
+// here you can use const f.e. due to the fact you will not change recKeys
+var recKeys = localStorage.getItem("recordedKeys").split(" ");
+// Play each recorded key with timeout of 300
+recKeys.forEach((name, i) => {
+
+// so f.e.
+const recKeys = localStorage.getItem("recordedKeys").split(" ");
+// Play each recorded key with timeout of 300
+recKeys.forEach((name, i) => {
+```
+2. avoid unnecessary introduction of variables
+```JS
+//here you use newVal to get the string that you want to save to the storage, but you could just use it directly where needed
+var newVal =
+    localStorage.getItem("recordedKeys") +
+    key.getAttribute("data-key") +
+    " ";
+key.classList.add("record");
+localStorage.setItem("recordedKeys", newVal);
+
+//what you can do
+key.classList.add("record");
+localStorage.setItem("recordedKeys", localStorage.getItem("recordedKeys") + key.getAttribute("data-key") + " ");
+
+//this is a really minor point, in JS it can affect performance slightly and is irrelevant most of the time but is really dependant on what the compiler does with your code
+//with that said, its a known discussion if one or the other is more readable/adequate
+//https://www.w3schools.com/js/js_performance.asp
+//so for you it really comes down to just keeping this in mind
+```
+3. avoid unnecessary nesting
+```JS
+//here is an example where you can spare some nesting and lines by turning it around
+if (e.keyCode == 32) {
+    // your code...
+} else {
+    return;
+}
+//instead of checking wheter the keycode is 32 you can just check if its not and then move on
+if (e.keyCode !== 32) 
+    return;
+// your code...
+
+//in this case it might not be that impactful but if you have a chain of validation, this will keep your code flat and more readable
+```
+4. avoid repetitive work
+```JS
+//here you play your audio
+recAudio.volume = 0.5;
+recAudio.play();
+
+//you do this everytime you are pressing a button, so basically you also set the volume everytime
+//but that is not needed
+//when your document loads you can just set the audio for all your elements
+
+//set audio volume at the start and not when you press a key
+for (const el of document.getElementsByTagName("audio")) el.volume = 0.5;
+
+```
+5. avoid re-referencing dom elements that are static
+```JS
+//here you get your elements to use
+document.addEventListener("keydown", (e) => {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    const keys = document.querySelector(".keys");
+    //your code...
+});
+
+//now your keys variable will always be the same but you will still get it always
+//so what you can do
+const keys = document.querySelector(".keys");
+document.addEventListener("keydown", (e) => {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    //your code...
+});
+
+//we just reuse keys and our code will prob. be faster
+```
+6. overlapping audio elements sound
+```JS
+//here you have your audio play 
+var play = setTimeout(() => {
+    const recAudio = document.querySelector(
+        `audio[data-key="${name}"]`
+    );
+    if (recAudio) {
+        recAudio.volume = 0.5;
+        recAudio.play();
+    }
+}, i * 300);
+
+//the problem here is that 300ms is not enough to play f.e. the Openhat, and then it wont play the queue that you have recorded correctly
+//the main issue here is that you reuse the same audio element and expect it to play even if its not finished
+
+//to overcome this you either reset the current audio time in your timeout callback (so it chops the audio)
+recAudio.currentTime = 0;
+
+//or you create a clone of the exact audio element and let it do its own thing
+recAudio.cloneNode(true).play();
+
+//or you increase the duration it plays
+
+```
+7. consider using a JS onload event
+right now you put your script at the bottom of the body, this means it depends where its located
+if you wrap your js with a listener for when the document is loaded, the location does not matter anymore and you can even put it in the head like your classList
