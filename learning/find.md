@@ -67,3 +67,11 @@ movies.find(el => el.yearend === 2007).main_actor.name
 ```JS
 movies.filter(m => m.other_actors.find(a => a.latest_movie === "Shooter"))
 ```
+
+## reference
+### types
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures
+### array
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+### object
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
