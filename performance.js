@@ -19,6 +19,7 @@ function heavylifting1() {
 }
 
 function heavylifting2() {
+    const obj = { name: "", name: "" }
     return 3 ** 3 * 3
 }
 
