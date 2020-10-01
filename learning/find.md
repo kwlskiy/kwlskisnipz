@@ -53,15 +53,15 @@ movies[0].id
 ```
 ## 2. find a show that has the title "The Sopranos"
 ```JS
-movies.find(el => el.title === "The Sopranos")
+movies.find(m => m.title === "The Sopranos")
 ```
 ## 3. find all shows that released 1999 or later
 ```JS
-movies.filter(el => el.yearstart >= 1999)
+movies.filter(m => m.yearstart >= 1999)
 ```
 ## 4. find a show that ended 2007 and get its mainactors name
 ```JS
-movies.find(el => el.yearend === 2007).main_actor.name
+movies.find(m => m.yearend === 2007).main_actor.name
 ```
 ## 5. find all movies that have other actors that acted lately in the movie "Shooter"
 ```JS
