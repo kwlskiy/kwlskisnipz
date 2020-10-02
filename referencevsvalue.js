@@ -15,12 +15,12 @@ function reverseDeep(s) {
 console.log(startArray)
 
 
-//this happens because the parameter is passed by value and startArray is a "reference type" so it does not contain the actual values itself, 
+//this happens because the parameter is passed by value and startArray is a "reference type" so it does not contain the actual values itself,
 //it contains a reference to the memory where these values are stored
 //so with reverseDeep we re-use the reference and change the value where our array references to, because we dont copy the array as a whole including the reference
 
 
-//if we take a primitive type like f.e. a string or a number as our variable type, 
+//if we take a primitive type like f.e. a string or a number as our variable type,
 //we can see that we are not changing the initial value if passed as a parameter to the function
 let name = "Mario"
 changeString(name)
@@ -39,7 +39,7 @@ function changeStringDeep() {
 //"Mario, no Luigi"
 console.log(name)
 
-//this is also the reason why you can f.e. push to arrays that are declared const, because we dont change the reference or the array as a whole, 
+//this is also the reason why you can f.e. push to arrays that are declared const, because we dont change the reference or the array as a whole,
 //we only change the values where our reference points to
 const myArr = ["unpushed"];
 myArr.push("pushed")
@@ -55,5 +55,5 @@ console.log(myObj.name)
 //myArr = ["pusher"]
 
 //types:
-//value types: Boolean, null, String, undefined, Number
+//value types: boolean, null, string, undefined, number
 //ref. types: Array, Object, Function
