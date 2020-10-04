@@ -1,7 +1,7 @@
 const arr = [{ name: "heroku", type: "PaaS" }, { name: "back4app", type: "PaaS" }, { name: "AWS", type: "?" }, { name: "Azure", type: "?" }]
 //if you want to utilize arr, try to understand what is the type of arr, what are the types inside arr
 
-//try to think if you want to find multiple or only one? 
+//try to think if you want to find multiple or only one?
 //this can impact performance quite significant depending on the size of the array also it makes you more code and its less readable
 //in this case we want the first object with "AWS" as name, return type {}
 console.log(arr.find(s => s.name === "AWS"))

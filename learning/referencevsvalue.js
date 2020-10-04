@@ -39,6 +39,15 @@ function changeStringDeep() {
 //"Mario, no Luigi"
 console.log(name)
 
+let myNum = Number(0);
+changeNumber(myNum)
+function changeNumber(num) {
+    //if we dont pass the variable and just change it within the scope, it changes as our variable as expected
+    num += 1
+}
+//"Mario, no Luigi"
+console.log(myNum)
+
 //this is also the reason why you can f.e. push to arrays that are declared const, because we dont change the reference or the array as a whole,
 //we only change the values where our reference points to
 const myArr = ["unpushed"];
